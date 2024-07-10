@@ -37,6 +37,7 @@ typedef struct {
 
 // make save to file function
 // I have no idea why astersisks are in the parameters but okay?
+// this function I think expects a pointer?
 void saveToFile(todoList *list, const char *filename) {
     FILE *fp = fopen(filename, "w");
 
@@ -60,6 +61,14 @@ int main(void) {
 
     // declare new test todoList
     // then call the saveToFile function
+    todoItem testItem = {"Hello", 1};
+
+    todoList testList = {testItem, 1};
+
+    char testFP[] = "test.txt";
+
+    // function works yay
+    saveToFile(&testList, testFP); 
 
     initscr();
     cbreak();
