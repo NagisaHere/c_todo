@@ -71,9 +71,20 @@ void loadFromFile(todoList *list, const char *filename) {
         return;
     }
 
-    int itemCount  = 0;  // count for todoList
+    list->count = 0;  // reset to 0 to replace stored list with smth new
 
-    // fscanf is used
+    // fscanf(stream (fp), const char* format) is used
+    // %[^\n] means read until you have found a \n character
+    // no idea why % is red though
+
+    while (fscanf(fp, "%d, %[^\n]\n", &list->items[list->count].completed,
+        list->items[list->count].task) == 2) {
+            list->count++;
+
+            if (list->count >= maxItems) {
+                break;
+            }
+        }
 
     fclose(fp);
 }
@@ -85,15 +96,13 @@ int main(void) {
     
     hello();
 
-    // declare new test todoList
-    // then call the saveToFile function
-    todoItem testItem = {"Hello", 1};
+    // test load
+    todoItem testItem = {"Goodbye", 1};
 
     todoList testList = {{testItem}, 1};
+    loadFromFile(&testList, "test.txt");
 
-    char testFP[] = "test.txt";
-
-    saveToFile(&testList, testFP); 
+    printf("%s", testItem.task);  // this I dont think works?
 
     initscr();
     cbreak();

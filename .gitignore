@@ -1,1 +1,3 @@
+# These should be cleaned but as a contingency measure they will be ignored
 *.o
+output
