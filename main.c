@@ -79,12 +79,23 @@ void loadFromFile(todoList *list, const char *filename) {
 
     while (fscanf(fp, "%d, %[^\n]\n", &list->items[list->count].completed,
         list->items[list->count].task) == 2) {
+
+            // // I am confused
+            // int *pX = &list->items[list->count].completed;
+            // int completion = *pX;
+            // // list->items[list->count].task is a pointer I think?
+
+            // printf("Task #%d has been loaded\n", completion);
+
             list->count++;
 
             if (list->count >= maxItems) {
                 break;
             }
+
+            printf("Item has been added \n");
         }
+    printf("finished loading\n");
 
     fclose(fp);
 }
@@ -93,16 +104,7 @@ void loadFromFile(todoList *list, const char *filename) {
 
 int main(void) {
     // initialise basic ncurses window
-    
     hello();
-
-    // test load
-    todoItem testItem = {"Goodbye", 1};
-
-    todoList testList = {{testItem}, 1};
-    loadFromFile(&testList, "test.txt");
-
-    printf("%s", testItem.task);  // this I dont think works?
 
     initscr();
     cbreak();

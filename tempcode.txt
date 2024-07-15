@@ -1,0 +1,13 @@
+in main
+    // test load
+    char test[] = "hello";
+
+    todoItem testItem = {"Goodbye", 0};
+
+    todoList testList = {{{{&testItem, 1}}}};
+    printf("before\n");
+    loadFromFile(&testList, "test.txt");
+    printf("after %d \n", testItem.completed);
+
+    // TestLoad();
+    // printf("%s", testItem.task);  // doesnt work (stuck in an inf loop)
